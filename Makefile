@@ -1,16 +1,32 @@
 #!/bin/bash
 
-run: sim0 sim1
+run: run0 run1 run2 run3
+
+run0: sim0
 	./sim0
+
+run1: sim1
 	./sim1
 
-sim0:
-	iverilog -g2012 -o sim0 -s tb tb.sv dut.sv
+run2: sim2
+	./sim2
 
-sim1:
-	iverilog -g2012 -o sim1 -s tb -DDOUBLE_ARST tb.sv dut.sv
+run3: sim3
+	./sim3
+
+sim0: tb.sv dut.sv
+	iverilog -g2012 -o $@ -s tb $^
+
+sim1: tb.sv dut.sv
+	iverilog -g2012 -o $@ -s tb -DDOUBLE_ARST $^
+
+sim2: tb.sv dut_myff.sv myff_udp.sv
+	iverilog -g2012 -o $@ -s tb $^
+
+sim3: tb.sv dut_myff.sv myff_force.sv
+	iverilog -g2012 -o $@ -s tb $^
 
 clean:
-	rm -f sim0 sim1 sim.vcd
+	rm -f sim[0-9] sim.vcd
 
 .PHONY: run clean
