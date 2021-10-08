@@ -3,7 +3,7 @@
 		output reg q,
 		input d, clk, arst, rval
 	);
-		always @(posedge clk)
+		always_ff @(posedge clk)
 			if (arst) q <= rval;
 			else      q <= d;
 	endmodule
