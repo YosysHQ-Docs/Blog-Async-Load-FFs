@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run: run0 run1 run2 run3 run4
+run: run0 run1 run2 run3 run4 run5
 
 
 run0: sim0
@@ -18,6 +18,9 @@ run3: sim3
 run4: sim4
 	./sim4
 
+run5: sim5
+	./sim5
+
 
 sim0: tb.sv dut.sv
 	iverilog -g2012 -o $@ -s tb $^
@@ -32,6 +35,9 @@ sim3: tb.sv dut_myff.sv myff_ada.sv
 	iverilog -g2012 -o $@ -s tb $^
 
 sim4: tb.sv dut_ada.sv
+	iverilog -g2012 -o $@ -s tb $^
+
+sim5: tb.sv dut_myff.sv myff_hack.sv
 	iverilog -g2012 -o $@ -s tb $^
 
 
