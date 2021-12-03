@@ -1,4 +1,4 @@
-`ifdef SYNTHESES
+`ifdef SYNTHESIS
 	module myff (
 		output reg q,
 		input d, clk, arst, rval
